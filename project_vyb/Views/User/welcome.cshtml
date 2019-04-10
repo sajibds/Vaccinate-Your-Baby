@@ -1,0 +1,113 @@
+﻿@model project_vyb.ViewModel.HomeView
+@{
+    ViewBag.Title = "welcome";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Given Vaccines</h2>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+
+                </th>
+            </tr>
+            @{
+            foreach (var m in Model.given_Vaccines)
+            {
+                <tr>
+                    <td>
+                        @m.vaccine.vac_name
+                    </td>
+                    <td>
+                        @m.given_date
+                    </td>
+                </tr>
+        }
+            }
+        </table>
+    </div>
+    
+</div>
+<div>
+    <h2>Upcoming vaccinations</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        @{
+        foreach (var m in Model.upcommings)
+        {
+            <tr>
+                <td>
+                    @m.VacineName
+                </td>
+                <td>
+                    @m.Due_Time
+                </td>
+            </tr>
+    }
+        }
+    </table>
+</div>
+<div">
+    <h2>Due vaccinations</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        @{
+            foreach (var m in Model.due)
+            {
+                <tr>
+                    <td>
+                        @m.VacineName
+                    </td>
+                    <td>
+                        @m.Due_Time
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Mark as Done" />
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    </div>
+    @{
+
+        ViewBag.Title = "welcome";
+        if (Session["user"] != null)
+        {
+            using (Html.BeginForm("logout", "User"))
+            {
+                <input type="submit" value="Logout" />
+            }
+        }
+        else
+        {
+            Response.Redirect("~/User/Login");
+        }
+    }
